@@ -86,6 +86,7 @@ GEM
     nokogiri (1.8.1)
       mini_portile2 (~> 2.3.0)
     orm_adapter (0.5.0)
+    pg (0.21.0)
     puma (3.10.0)
     rack (2.0.3)
     rack-test (0.7.0)
@@ -155,6 +156,7 @@ DEPENDENCIES
   devise
   jquery-rails
   listen
+  pg
   puma (~> 3.7)
   rails (~> 5.1.4)
   sqlite3
