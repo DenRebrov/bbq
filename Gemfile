@@ -9,6 +9,10 @@ gem 'rails', '~> 5.1.4'
 
 gem 'devise'
 
+gem 'devise-i18n'
+
+gem 'rails-i18n', '~>5.0.0'
+
 gem 'twitter-bootstrap-rails'
 
 gem 'puma', '~> 3.7'

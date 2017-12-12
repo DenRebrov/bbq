@@ -46,12 +46,12 @@
           <span class="icon-bar"></span>
         </button>
 
-        <%= link_to "BBQ!", root_path, class: 'navbar-brand' %>
+        <%= link_to t('app.name'), root_path, class: 'navbar-brand' %>
 
         <div class="navbar-collapse collapse navbar-responsive-collapse">
           <ul class="nav navbar-nav">
             <% if user_signed_in? %>
-                <li><%= link_to 'Профиль', current_user %></li>
+                <li><%= link_to "Мой профиль: @#{current_user.name}", current_user %></li>
                 <li><%= link_to 'Выйти', destroy_user_session_path,
                                 method: :delete %></li>
             <% else %>
@@ -75,7 +75,7 @@
       </div>
 
       <footer>
-        <p>&copy; Company 2017</p>
+        <p>&copy; <%= t 'app.company' %> 2017</p>
       </footer>
 
     </div> <!-- /container -->
