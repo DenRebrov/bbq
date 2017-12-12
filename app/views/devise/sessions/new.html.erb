@@ -2,7 +2,6 @@
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 
-
   <div class="col-md-6 buffer-top">
     <div class="form-group">
       <%= f.label :email %><br />
@@ -26,6 +25,6 @@
     или
     <%= link_to 'Зарегистрироваться', new_user_registration_path %>
   </div>
-
+  </div>
 <% end %>
 
