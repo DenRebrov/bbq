@@ -1,20 +1,26 @@
+# (с) goodprogrammer.ru
+#
+# Контроллер вложенного ресурса комментариев
 class CommentsController < ApplicationController
+  # задаем "родительский" event для коммента
   before_action :set_event, only: [:create, :destroy]
+
+  # задаем сам коммент
   before_action :set_comment, only: [:destroy]
 
-  # POST /comments
   def create
     @new_comment = @event.comments.build(comment_params)
     @new_comment.user = current_user
 
     if @new_comment.save
+      # если сохранился успешно, редирект на страницу самого события
       redirect_to @event, notice: I18n.t('controllers.comments.created')
     else
+      # если ошибки — рендерим здесь же шаблон события
       render 'events/show', alert: I18n.t('controllers.comments.error')
     end
   end
 
-  # DELETE /comments/1
   def destroy
     message = {notice: I18n.t('controllers.comments.destroyed')}
 
