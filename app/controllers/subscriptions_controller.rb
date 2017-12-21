@@ -5,15 +5,16 @@ class SubscriptionsController < ApplicationController
   # Задаем подписку, которую юзер хочет удалить
   before_action :set_subscription, only: [:destroy]
 
+  before_action :email_verification, only: [:create]
+
   def create
     # Болванка для новой подписки
     @new_subscription = @event.subscriptions.build(subscription_params)
     @new_subscription.user = current_user
 
-    if !User.find_by(email: @new_subscription.user_email).present? && @new_subscription.save
-
+    if @new_subscription.save
       # Отправляем письмо автору события
-      EventMailer.subscription(@event, @new_subscription).deliver_now
+      #EventMailer.subscription(@event, @new_subscription).deliver_now
 
       redirect_to @event, notice: I18n.t('controllers.subscriptions.created')
     else
@@ -34,6 +35,12 @@ class SubscriptionsController < ApplicationController
   end
 
   private
+
+  def email_verification
+    if User.find_by(email: subscription_params[:user_email]).present?
+      redirect_to @event, alert: I18n.t('controllers.subscriptions.email_exist')
+    end
+  end
 
   def set_subscription
     @subscription = @event.subscriptions.find(params[:id])
