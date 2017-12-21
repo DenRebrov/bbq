@@ -2,7 +2,7 @@ class Subscription < ActiveRecord::Base
   belongs_to :event
   belongs_to :user, optional: true
 
-  validates :event, presence: true
+  validates :event, presence: true, format: /\A#{@event}\z/
 
   # проверки выполняются только если user не задан (незареганные приглашенные)
   validates :user_name, presence: true, unless: 'user.present?'
