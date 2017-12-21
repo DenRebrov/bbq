@@ -59,12 +59,11 @@ Rails.application.configure do
 
   # Настройки для работы через GMail аккаунт
   config.action_mailer.smtp_settings = {
-      address: 'smtp.gmail.com',
+      address: 'dendendynamite@gmail.com',
       port: '587',
-      user_name: 'goodcat', # не используйте для тестов свои реальные ящики
-      password: 'DenProrab', # не храните здесь пароль!
+      user_name: 'Den', # не используйте для тестов свои реальные ящики
+      password: 'DenProgrammer', # не храните здесь пароль!
       authentication: 'plain',
       enable_starttls_auto: true
   }
-
 end

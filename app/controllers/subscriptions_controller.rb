@@ -11,6 +11,10 @@ class SubscriptionsController < ApplicationController
     @new_subscription.user = current_user
 
     if !User.find_by(email: @new_subscription.user_email).present? && @new_subscription.save
+
+      # Отправляем письмо автору события
+      EventMailer.subscription(@event, @new_subscription).deliver_now
+
       redirect_to @event, notice: I18n.t('controllers.subscriptions.created')
     else
       render 'events/show', alert: I18n.t('controllers.subscriptions.error')
