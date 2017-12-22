@@ -12,9 +12,9 @@
     </div>
 
     <div class="form-group">
-      <%#= f.label :avatar %>
-      <p><%#= image_tag(@user.avatar.thumb.url) if @user.avatar? %></p>
-      <%#= f.file_field :avatar %>
+      <%= f.label :avatar %>
+      <p><%= image_tag(@user.avatar.thumb.url) if @user.avatar? %></p>
+      <%= f.file_field :avatar %>
     </div>
 
     <div class="actions">
