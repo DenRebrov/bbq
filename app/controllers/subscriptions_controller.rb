@@ -7,6 +7,8 @@ class SubscriptionsController < ApplicationController
 
   before_action :email_verification, only: [:create]
 
+  before_action :subscription_verification, only: [:create]
+
   def create
     # Болванка для новой подписки
     @new_subscription = @event.subscriptions.build(subscription_params)
@@ -35,6 +37,12 @@ class SubscriptionsController < ApplicationController
   end
 
   private
+
+  def subscription_verification
+    if current_user == @event.user
+      redirect_to @event, alert: I18n.t('controllers.subscriptions.subscription_verification_error')
+    end
+  end
 
   def email_verification
     if User.find_by(email: subscription_params[:user_email]).present?
