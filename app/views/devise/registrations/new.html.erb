@@ -1,32 +1,26 @@
-<h2>Регистрация пользователя</h2>
+<h2><%= t('.sign_up') %></h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
 
-    <div class="col-md-6 buffer-top">
-      <%= devise_error_messages! %>
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true %>
+  </div>
 
-      <div class="form-group">
-        <%= f.label :email %><br />
-        <%= f.email_field :email, autofocus: true, class: "form-control" %>
-      </div>
+  <div class="field">
+    <%= f.label :password %><br />
+    <%= f.password_field :password, autocomplete: "off" %>
+  </div>
 
-      <div class="form-group">
-        <%= f.label "Пароль" %>
-        <% if @minimum_password_length %>
-            <em>(минимально <%= @minimum_password_length %> символов)</em>
-        <% end %><br />
-        <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
-      </div>
+  <div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+  </div>
 
-      <div class="form-group">
-        <%= f.label "Подтверждение пароля" %><br />
-        <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
-      </div>
-
-      <div class="actions">
-        <%= f.submit 'Зарегистрироваться', class: 'btn btn-primary' %>
-        или
-        <%= link_to 'Войти', new_user_session_path %>
-      </div>
-    </div>
+  <div class="actions">
+    <%= f.submit t('.sign_up') %>
+  </div>
 <% end %>
+
+<%= render "devise/shared/links" %>
