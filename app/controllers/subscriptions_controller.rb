@@ -5,8 +5,6 @@ class SubscriptionsController < ApplicationController
   # Задаем подписку, которую юзер хочет удалить
   before_action :set_subscription, only: [:destroy]
 
-  #before_action :email_verification, only: [:create]
-
   before_action :subscription_verification, only: [:create]
 
   def create
@@ -43,12 +41,6 @@ class SubscriptionsController < ApplicationController
       redirect_to @event, alert: I18n.t('controllers.subscriptions.subscription_verification_error')
     end
   end
-
-  #def email_verification
-  #  if User.find_by(email: subscription_params[:user_email]).present?
-  #    redirect_to @event, alert: I18n.t('controllers.subscriptions.email_exist')
-  #  end
-  #end
 
   def set_subscription
     @subscription = @event.subscriptions.find(params[:id])

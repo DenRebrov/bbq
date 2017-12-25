@@ -2,7 +2,7 @@ class Subscription < ActiveRecord::Base
   belongs_to :event
   belongs_to :user, optional: true
 
-  validates :event, presence: true#, format: /\A#{@event}\z/
+  validates :event, presence: true
 
   # проверки выполняются только если user не задан (незареганные приглашенные)
   validates :user_name, presence: true, unless: 'user.present?'
@@ -39,6 +39,6 @@ class Subscription < ActiveRecord::Base
   def email_verification
     user = User.find_by(email: self.user_email)
 
-    self.errors.add(:email, 'уже существует') if user.present?
+    self.errors.add(:email, 'уже существует') if user.present? && user.blank?
   end
 end

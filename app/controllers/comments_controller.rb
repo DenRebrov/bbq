@@ -11,6 +11,7 @@ class CommentsController < ApplicationController
   def create
     @new_comment = @event.comments.build(comment_params)
     @new_comment.user = current_user
+    #@subscription = @user.subscriptions.find_by(params[:user_name])
 
     if @new_comment.save
       # уведомляем всех подписчиков о новом комментарии
@@ -50,8 +51,13 @@ class CommentsController < ApplicationController
   end
 
   def notify_subscribers(event, comment)
-    # собираем всех подписчиков и автора события в массив мэйлов, исключаем повторяющиеся
-    all_emails = (event.subscriptions.map(&:user_email) + [event.user.email]).uniq
+    user_subscriber = event.subscribers.find_by(params[:user_email])
+
+    if current_user == event.user || user_subscriber.present?
+      all_emails = (event.subscriptions.map(&:user_email)).uniq
+    else
+      all_emails = (event.subscriptions.map(&:user_email) + [event.user.email]).uniq
+    end
 
     # XXX: Этот метод может выполняться долго из-за большого числа подписчиков
     # поэтому в реальных приложениях такие вещи надо выносить в background задачи!
