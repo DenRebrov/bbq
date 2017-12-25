@@ -16,7 +16,7 @@ class SubscriptionsController < ApplicationController
 
     if @new_subscription.save
       # Отправляем письмо автору события
-      #EventMailer.subscription(@event, @new_subscription).deliver_now
+      EventMailer.subscription(@event, @new_subscription).deliver_now
 
       redirect_to @event, notice: I18n.t('controllers.subscriptions.created')
     else

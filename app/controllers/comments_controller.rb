@@ -13,7 +13,6 @@ class CommentsController < ApplicationController
     @new_comment.user = current_user
 
     if @new_comment.save
-
       # уведомляем всех подписчиков о новом комментарии
       notify_subscribers(@event, @new_comment)
 
