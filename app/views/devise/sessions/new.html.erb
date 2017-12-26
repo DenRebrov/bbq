@@ -25,10 +25,8 @@
       <div class="actions">
         <%= f.submit 'Войти', class: 'btn btn-primary' %>
         или
-        <%= link_to 'Зарегистрироваться', new_user_registration_path %>
+        <%= link_to I18n.t('views.devise.registrations.forgot_password'), new_password_path(resource_name) %><br />
       </div>
-
-      <%= render "devise/shared/links" %>
     </div>
 <% end %>
 
