@@ -10,5 +10,5 @@ Rails.application.routes.draw do
     post :show, on: :member
   end
 
-  resources :users, only: [:show, :edit, :update, :destroy]
+  resources :users, only: [:show, :edit, :update]
 end

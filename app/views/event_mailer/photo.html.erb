@@ -1,14 +1,7 @@
-<h1><%= t '.title' %></h1>
-<img src="<%= @photo.photo.url %>" alt="[Фото]" >
-<p><%= t '.author' %>: <strong><%= @photo.user.name %></strong></p>
+<%= t '.title' %>
 
-<hr/>
-
-<%= t '.event' %>
-<h3><%= @event.title %></h3>
-
-<%= t '.datetime' %>
-<h4><%= l @event.datetime %></h4>
-
-<%= t '.owner' %>
-<h4><%= @event.user.name %></h4>
+<div>
+  <H1><%= t '.author'%>: <%= @photo.user.name %></H1>
+  <H4><%= t '.photo'%></H4> <%= link_to image_tag(@photo.photo.thumb.url), event_url(@event) %>
+  <H4><%= t '.event'%>: <%= @event.title %></H4>
+</div>
