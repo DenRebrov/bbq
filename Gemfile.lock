@@ -57,6 +57,10 @@ GEM
       warden (~> 1.2.3)
     devise-i18n (1.5.0)
       devise (>= 3.4)
+    dotenv (2.2.1)
+    dotenv-rails (2.2.1)
+      dotenv (= 2.2.1)
+      railties (>= 3.2, < 5.2)
     erubi (1.7.0)
     excon (0.60.0)
     execjs (2.7.0)
@@ -190,6 +194,7 @@ DEPENDENCIES
   carrierwave
   devise
   devise-i18n
+  dotenv-rails
   fog-aws
   jquery-rails
   lightbox2-rails

@@ -29,6 +29,8 @@ gem 'fog-aws'
 
 gem 'lightbox2-rails'
 
+gem 'dotenv-rails'
+
 group :production do
   gem 'pg'
 end
