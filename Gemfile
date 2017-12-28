@@ -27,6 +27,8 @@ gem 'rmagick'
 
 gem 'fog-aws'
 
+gem 'lightbox2-rails'
+
 group :production do
   gem 'pg'
 end
