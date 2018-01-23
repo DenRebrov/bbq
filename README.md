@@ -17,3 +17,5 @@ https://uberbbq.herokuapp.com/
 
 Для работы почты на хероку должен быть подключен SendGrid.
 
+## Контактные данные
+den_rebrov@list.ru
