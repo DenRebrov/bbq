@@ -1,8 +1,15 @@
+# Контроллер, управляющий событиями
 class EventsController < ApplicationController
+  # встроенный в девайз фильтр - посылает незалогиненного пользователя
   before_action :authenticate_user!, except: [:show, :index]
 
+  # задаем объект @event для экшена show
   before_action :set_event, only: [:show]
+
+  # задаем объект @event от текущего юзера
   before_action :set_current_user_event, only: [:edit, :update, :destroy]
+
+  # задаем пинкод для экшена show
   before_action :password_guard!, only: [:show]
 
   # GET /events
@@ -31,6 +38,8 @@ class EventsController < ApplicationController
     @event = current_user.events.build(event_params)
 
     if @event.save
+      # Используем сообщение из файла локалей ru.yml
+      # controllers -> events -> created
       redirect_to @event, notice: I18n.t('controllers.events.created')
     else
       render :new

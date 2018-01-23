@@ -1,10 +1,11 @@
+<%# Паршал для отображения фотографий на странице опльзователя  %>
 <% image_title = "Добавил #{render partial: 'users/user', object: photo.user}" %>
 
 <% if current_user_can_edit?(photo) %>
-    <% image_title += link_to(
-        fa_icon('trash'), event_photo_path(photo.event, photo),
-        method: :delete, data: {confirm: t('.destroy_confirm')}
-    ) %>
+  <% image_title += link_to(
+      fa_icon('trash'), event_photo_path(photo.event, photo),
+      method: :delete, data: {confirm: t('.destroy_confirm')}
+      ) %>
 <% end %>
 
 <span class="event-photo">

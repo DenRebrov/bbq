@@ -1,5 +1,3 @@
-# (с) goodprogrammer.ru
-#
 # Контроллер вложенного ресурса комментариев
 class CommentsController < ApplicationController
   # задаем "родительский" event для коммента
@@ -11,7 +9,6 @@ class CommentsController < ApplicationController
   def create
     @new_comment = @event.comments.build(comment_params)
     @new_comment.user = current_user
-    #@subscription = @user.subscriptions.find_by(params[:user_name])
 
     if @new_comment.save
       # уведомляем всех подписчиков о новом комментарии
@@ -28,6 +25,7 @@ class CommentsController < ApplicationController
   def destroy
     message = {notice: I18n.t('controllers.comments.destroyed')}
 
+    # удалять комментарии может только пользователь, который их создал
     if current_user_can_edit?(@comment)
       @comment.destroy!
     else
@@ -38,6 +36,7 @@ class CommentsController < ApplicationController
   end
 
   private
+
   def set_event
     @event = Event.find(params[:event_id])
   end
@@ -51,16 +50,18 @@ class CommentsController < ApplicationController
   end
 
   def notify_subscribers(event, comment)
+    # собираем всех подписчиков и автора события в массив мэйлов, исключаем повторяющиеся
     user_subscriber = event.subscribers.find_by(params[:user_email])
 
+    # автор комментария не получает уведомления на почту о своем собственном комменте и
+    # если зарегистрированный пользователь оставляет комментарий в событие, на которое подписан,
+    # то тоже не получает уведомления об этом, в остальных же случаях уведомления получают все
     if current_user == event.user || user_subscriber.present?
       all_emails = (event.subscriptions.map(&:user_email)).uniq
     else
       all_emails = (event.subscriptions.map(&:user_email) + [event.user.email]).uniq
     end
 
-    # XXX: Этот метод может выполняться долго из-за большого числа подписчиков
-    # поэтому в реальных приложениях такие вещи надо выносить в background задачи!
     all_emails.each do |mail|
       EventMailer.comment(event, comment, mail).deliver_now
     end

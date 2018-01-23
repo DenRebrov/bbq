@@ -36,6 +36,9 @@ class Subscription < ActiveRecord::Base
     end
   end
 
+
+  # переопределяем метод, если есть юзер, выдаем его email,
+  # если нет -- дергаем исходный переопределенный метод
   def email_verification
     user = User.find_by(email: self.user_email)
 

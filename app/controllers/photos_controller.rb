@@ -60,6 +60,8 @@ class PhotosController < ApplicationController
     params.fetch(:photo, {}).permit(:photo)
   end
 
+  # автор фото не получает уведомления на почту о своем собственном фото,
+  # в остальных же случаях уведомления получают все
   def notify_photos(event, photo)
     if current_user == event.user
       all_emails = (event.subscriptions.map(&:user_email)).uniq
@@ -67,8 +69,6 @@ class PhotosController < ApplicationController
       all_emails = (event.subscriptions.map(&:user_email) + [event.user.email]).uniq
     end
 
-    # XXX: Этот метод может выполняться долго из-за большого числа подписчиков
-    # поэтому в реальных приложениях такие вещи надо выносить в background задачи!
     all_emails.each do |mail|
       EventMailer.photo(event, photo, mail).deliver_now
     end

@@ -1,8 +1,12 @@
+# Основной контроллер приложения
+# Методы, определенные в нем, будут доступны во всех вложенных контроллерах
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
+  # настройка для работы девайза при правке профиля юзера
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+  # хелпер метод, доступный во вьюхах
   helper_method :current_user_can_edit?
 
   def configure_permitted_parameters

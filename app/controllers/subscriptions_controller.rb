@@ -1,3 +1,4 @@
+# Контроллер вложенного ресурса подписок
 class SubscriptionsController < ApplicationController
   # Задаем «родительский» event для подписки
   before_action :set_event, only: [:create, :destroy]
@@ -25,6 +26,7 @@ class SubscriptionsController < ApplicationController
   def destroy
     message = {notice: I18n.t('controllers.subscriptions.destroyed')}
 
+    # удалять подписку может только пользователь, который ее создал
     if current_user_can_edit?(@subscription)
       @subscription.destroy
     else
@@ -36,6 +38,7 @@ class SubscriptionsController < ApplicationController
 
   private
 
+  # проверка подписки на событие (нельзя подписаться на свое же событие)
   def subscription_verification
     if current_user == @event.user
       redirect_to @event, alert: I18n.t('controllers.subscriptions.subscription_verification_error')

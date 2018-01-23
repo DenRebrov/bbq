@@ -1,24 +1,25 @@
+<%# Паршал для отображения подписчиков события на странице события %>
 <%= form_for [@event, subscription] do |f| %>
-    <%= render partial: 'partials/form_errors', locals: {model: subscription} %>
+  <%= render partial: 'partials/form_errors', locals: {model: subscription} %>
 
-    <% unless user_signed_in? %>
-        <div class="form-group">
-          <%= f.label :user_name %>
-          <%= f.text_field :user_name, class: 'form-control' %>
-        </div>
-
-        <div class="form-group">
-          <%= f.label :user_email %>
-          <%= f.text_field :user_email, class: 'form-control' %>
-        </div>
-    <% end %>
-
-    <div class="actions">
-      <h4>Я пойду:</h4>
-      <% unless current_user == @event.user %>
-        <%= f.submit 'Подписаться', class: 'btn btn-primary' %>
-      <% else %>
-        <%= f.submit 'Подписаться', class: 'btn btn-danger' %>
-      <% end %>
+  <% unless user_signed_in? %>
+    <div class="form-group">
+      <%= f.label :user_name %>
+      <%= f.text_field :user_name, class: 'form-control' %>
     </div>
+
+    <div class="form-group">
+      <%= f.label :user_email %>
+      <%= f.text_field :user_email, class: 'form-control' %>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <h4>Я пойду:</h4>
+    <% unless current_user == @event.user %>
+      <%= f.submit 'Подписаться', class: 'btn btn-primary' %>
+    <% else %>
+      <%= f.submit 'Подписаться', class: 'btn btn-danger' %>
+    <% end %>
+  </div>
 <% end %>

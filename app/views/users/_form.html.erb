@@ -1,3 +1,4 @@
+<%# Паршал для отображения формы полей пользователя для редактирования %>
 <%= form_for @user, html: {multipart: true} do |f| %>
     <%= render partial: 'partials/form_errors', locals: {model: @user} %>
 
