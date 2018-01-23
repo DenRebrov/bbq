@@ -1,24 +1,19 @@
-# README
+# Гоу на шашлыки!
+Учебное приложение — организатор событий на rails 5.1.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Рассчитано на работу с Heroku.
 
-Things you may want to cover:
+Предназначено для освоения работы с загрузкой файлов, аутентификацией, авторизацией, гемами devise, carrierwave, фреймворком bootstrap.
 
-* Ruby version
+Учит также основам работы с локализацией и YML файлами.
 
-* System dependencies
+При желании может быть взято за основу для полезного и серьезного проекта.
 
-* Configuration
+## Демо
+https://uberbbq.herokuapp.com/
 
-* Database creation
+## Установка
+Для разворачивания своей копии клонируйте гит репозиторий (зеленая кнопочка в правом верхнем углу на гитхабе), залейте на свое приложение на Heroku (или создайте новое heroku create). Также поправьте урл сайта в production.rb.
 
-* Database initialization
+Для работы почты на хероку должен быть подключен SendGrid.
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
